@@ -26,7 +26,7 @@ Un **array** (o vettore) sono una **struttura dati astratta**, **omogenea** e **
 
             //Ci sono diversi metodi di inizializzare dei vettori. Uso int come tipo solo per semplicità si potrebbe usare qualsiasi tipo.
 
-            int[] vettoreA = new int[size]; // Vengono allocati N celle inzializzate a 0 per gli int, '' gli char o stringhe e null gli oggetti
+            int[] vettoreA = new int[size]; // Vengono allocati N celle inzializzate a 0 per gli int, '' per i char, "" per le stringhe e null gli oggetti
 
             int[] vettoreB = new int[] { 1, 2, 3 }; // Vengono allocate N celle per il numero di elementi che gli verranno inseriti
 
@@ -439,13 +439,69 @@ Di seguito analizzeremo un paio di metodi:
 
 ---
 
+<br><br>
+
 ## Dictionary
->[!IMPORTANT] 
-> Da aggiungere
+Il **Dictionary (o dizionario)** è una **struttura dati astratta**, **Omogenea (nonostante sia chiave, valore persiste nei suoi due tipi)** e solitamente **Dinamica**. La sua caratteristica principale è l'associazione chiave-valore. Proprio come in un array normale permette l'accesso tramite indice, in questo caso chiamato chiave, senza però limitarne il tipo in quanto la chiave può essere una stringa, oggetto o qualsiasi altro tipo di dato. Ognuna di queste deve però essere univoca nel dizionario e per garantire ciò si usa una **tabella Hash** (guardare la nota) contenente l'hash della chiave che permette di generare un valore univoco associato alla chiave. Nel caso più chiavi generino lo stesso hash C# rende il valore una lista dell'elemento precedente. Queste caratteristiche permetto un accesso con complessità O(1).
+
+>[!NOTE]
+> Una tabella hash è una struttura dati usata per mettere in corrispondenza una data chiave con un dato valore. Viene usata per l'implementazione di strutture dati astratte associative come le mappe o i set. 
+
+Metodi principali in C#:
+- **Add(chiave, valore)**: Aggiunge una coppia chiave - valore.
+- **dictionary[chiave]** = valore: Aggiunge o aggiorna un valore.
+- **Remove(chiave, valore)**: Rimuove la coppia chiave - valore
+- **Clear()**: Rimuove tutte le coppie dal dizionario
+- **ContainsKey(chiave)**: Verifica se una chiave esiste (O(1)).
+- **ContainsValue(valore)**: Verifica se un valore esiste (O(n)).
+
+Un'esempio di codice cone i Dictionary in C#:
+```C#
+    static void Main(string[] args)
+    {
+        int size = 5;
+        //Uso <int, string> come esempio ma si possono usare qualsiasi tipo per chiave e valore.
+        //Diversi modi di inizializzare i Dictionary:
+        Dictionary<int, string> dictionaryA = new Dictionary<int, string>(); //Crea un Dictionary vuoto
+        Dictionary<int, string> dictionaryB = new Dictionary<int, string>(size); //Crea un Dictionary con capacità iniziale N (ottimizzazione)
+        Dictionary<int, string>[] vettDictionaryA = new Dictionary<int, string>[size]; //Crea un vettore contenente N Dictionary che vanno istanziati
+        
+        //Metodo per istanziare un vettore di Dictionary:
+        for(int i = 0; i < size; i++)
+        {
+            vettDictionaryA[i] = new Dictionary<int, string>();
+        }
+        
+        Dictionary<int, string>[] vettDictionaryB = new Dictionary<int, string>[] { new Dictionary<int, string>(), new Dictionary<int, string>() }; //Crea un vettore con 2 Dictionary istanziati
+        Dictionary<int, Dictionary<int, string>> dictionaryDictionaryC = new Dictionary<int, Dictionary<int, string>>(); //Si può creare anche un Dictionary di Dictionary
+        
+        //Puoi anche inizializzare con elementi:
+        Dictionary<int, string> dictionaryD = new Dictionary<int, string>()
+        {
+            { 1, "uno" },
+            { 2, "due" },
+            { 3, "tre" },
+            { 4, "quattro" },
+            { 5, "cinque" }
+        };
+        
+        //Oppure con la sintassi degli indicizzatori (C# 6.0+):
+        Dictionary<int, string> dictionaryE = new Dictionary<int, string>()
+        {
+            [1] = "uno",
+            [2] = "due",
+            [3] = "tre"
+        };
+        
+        //NOTA: A differenza di HashSet, se provi ad aggiungere una chiave duplicata viene lanciata un'eccezione
+        //quindi non puoi inizializzare da un array con chiavi duplicate come con HashSet
+    }
+```
+
 ---
 
 ## HashSet
-Un HashSet è una **struttura dati astratta**, **Omogenea** e **Dinamica**. Non ha un'ordine specifico, è priva di duplicati e supporta operazioni insiemistiche.
+Un HashSet è una **struttura dati astratta**, **Omogenea** e solitamente **Dinamica**. Non ha un'ordine specifico, è priva di duplicati e supporta operazioni insiemistiche.
 
 Metodi principali in C#:
 - **Add(elemento)** = Aggiunge un'elemento alla hashmap. Ha complessità O(1) ammortizzato.
@@ -454,3 +510,36 @@ Metodi principali in C#:
 - **Clear()** = Rimuove ogni elemento dal HashSet. Ha complessità O(N).
 - **UnionWith(struttura dati)** = Unisce una struttura dati al HashSet. Ha complessità O(N).
 - **IntersectWith(struttura dati)** = Contiene solo gli elementi in comune in se e nella struttura passata come parametro. Ha complessità O(N + М).
+
+Un'esempio di codice con le pile in C#:
+```C#
+    static void Main(string[] args)
+    {
+        int size = 5;
+        //Uso int come esempio ma si potrebbe usare qualsiasi tipo come per le liste.
+
+        //Diversi modi di inizializzare gli HashSet:
+        HashSet<int> hashSetA = new HashSet<int>(); //Crea un HashSet vuoto
+
+        HashSet<int> hashSetB = new HashSet<int>(size); //Crea un HashSet con capacità iniziale N (ottimizzazione)
+
+        HashSet<int>[] vettHashSetA = new HashSet<int>[size]; //Crea un vettore contenente N HashSet che vanno istanziati
+        
+        //Metodo per istanziare un vettore di HashSet:
+        for(int i = 0; i < size; i++)
+        {
+            vettHashSetA[i] = new HashSet<int>();
+        }
+        
+        HashSet<int>[] vettHashSetB = new HashSet<int>[] { new HashSet<int>(), new HashSet<int>() }; //Crea un vettore con 2 HashSet istanziati
+
+        HashSet<HashSet<int>> hashSetHashSetC = new HashSet<HashSet<int>>(); //Si può creare anche un HashSet di HashSet
+
+        //Puoi anche inizializzare con elementi:
+        HashSet<int> hashSetD = new HashSet<int>() { 1, 2, 3, 4, 5 };
+        
+        //O da una collezione esistente:
+        int[] numeri = { 1, 2, 3, 3, 4, 5 }; //I duplicati vengono automaticamente rimossi
+        HashSet<int> hashSetE = new HashSet<int>(numeri); //Conterrà: 1, 2, 3, 4, 5
+    }
+```
