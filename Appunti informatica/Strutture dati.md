@@ -445,7 +445,7 @@ Di seguito analizzeremo un paio di metodi:
 ---
 
 ## HashSet
-Un HashSet è una **struttura dati astratta**, **Omogenea** e **Dinamica**. Non ha un'ordine specifico ed è priva di duplicati e supporta operazioni insiemistiche.
+Un HashSet è una **struttura dati astratta**, **Omogenea** e **Dinamica**. Non ha un'ordine specifico, è priva di duplicati e supporta operazioni insiemistiche.
 
 Metodi principali in C#:
 - **Add(elemento)** = Aggiunge un'elemento alla hashmap. Ha complessità O(1) ammortizzato.
