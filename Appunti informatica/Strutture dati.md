@@ -269,7 +269,7 @@ Di seguito analizzeremo un paio di metodi:
 1. Controlla se gli elementi presenti nel vettore(Count) sono tanti quanta la capacità massima del vettore
    1. In caso fa crescere la coda che raddoppia la Capacity e ricopia gli elementi
 2. Inseriamo l'elemento nella coda
-3. Cambiamo il valore della coda tramite un calcolo modulare, ovverosia aumentiamo la tail di 1 - visto che abbiamo aumentato di 1 elemento - e facciamo il modulo del risultato. Questa operazione è fatta in quanto il modulo permette di "riavvolgere" il vettore. Es. se abbiamo una coda con capacity = 4, Count = 2 е tail = 3 facendo (3+1)%4 torniamo alla posizione 0 del vettore e è questa operazione a rendere il vettore circolare. **Consiglio**: Rivedersi il calcolo del resto in quanto il modulo si basa su quello.
+3. Cambiamo il valore della coda tramite un calcolo modulare, ovverosia aumentiamo la tail di 1 - visto che abbiamo aumentato di 1 elemento - e facciamo il modulo del risultato. Questa operazione è fatta in quanto il modulo permette di "riavvolgere" il vettore. Es. se abbiamo una coda con capacity = 4, Count = 3, head = 0, tail = 3 facendo (3+1)%4 torniamo alla posizione 0 del vettore e è questa operazione a rendere il vettore circolare. **Consiglio**: Rivedersi il calcolo del resto in quanto il modulo si basa su quello.
 4. Incrementiamo Count in quanto abbiamo aggiunto un'elemento alla coda.
 
 #### Dequeue(elemento)
