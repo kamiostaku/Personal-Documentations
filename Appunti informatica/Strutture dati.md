@@ -500,6 +500,8 @@ Un'esempio di codice cone i Dictionary in C#:
 
 ---
 
+<br><br>
+
 ## HashSet
 Un HashSet è una **struttura dati astratta**, **Omogenea** e solitamente **Dinamica**. Non ha un'ordine specifico, è priva di duplicati e supporta operazioni insiemistiche.
 
