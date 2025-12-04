@@ -511,7 +511,7 @@ Metodi principali in C#:
 - **UnionWith(struttura dati)** = Unisce una struttura dati al HashSet. Ha complessità O(N).
 - **IntersectWith(struttura dati)** = Contiene solo gli elementi in comune in se e nella struttura passata come parametro. Ha complessità O(N + М).
 
-Un'esempio di codice con le pile in C#:
+Un'esempio di codice con lo HashSet in C#:
 ```C#
     static void Main(string[] args)
     {
