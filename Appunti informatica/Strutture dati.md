@@ -445,7 +445,8 @@ Di seguito analizzeremo un paio di metodi:
 Il **Dictionary (o dizionario)** è una **struttura dati astratta**, **Omogenea (nonostante sia chiave, valore persiste nei suoi due tipi)** e solitamente **Dinamica**. La sua caratteristica principale è l'associazione chiave-valore. Proprio come in un array normale permette l'accesso tramite indice, in questo caso chiamato chiave, senza però limitarne il tipo in quanto la chiave può essere una stringa, oggetto o qualsiasi altro tipo di dato. Ognuna di queste deve però essere univoca nel dizionario e per garantire ciò si usa una **tabella Hash** (guardare la nota) contenente l'hash della chiave che permette di generare un valore univoco associato alla chiave. Nel caso più chiavi generino lo stesso hash C# inserisce l'elemento in una lista di quel tipo. Queste caratteristiche permetto un accesso con complessità O(1).
 
 >[!NOTE]
-> Una tabella hash è una struttura dati usata per mettere in corrispondenza una data chiave con un dato valore. Viene usata per l'implementazione di strutture dati astratte associative come le mappe o i set. 
+> Una tabella hash è una struttura dati usata per mettere in corrispondenza una data chiave con un dato valore. Viene usata per l'implementazione di strutture dati astratte associative come le mappe o i set.
+> Nel momento in cui viene hashato un valore si ottiene il suo indirizzo in memoria.
 
 Metodi principali in C#:
 - **Add(chiave, valore)**: Aggiunge una coppia chiave - valore.
