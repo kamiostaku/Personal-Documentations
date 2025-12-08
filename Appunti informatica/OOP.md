@@ -5,7 +5,8 @@ Nell'OOP una distinzione fondamentale sono:
 - **Classi**: Sono il **progetto/modello** o in inglese blueprint che **definisce** le **proprietà/campi e le azioni che quel tipo oggetto avrà**.
 
 >[!NOTE]
->Paradigma: modello di riferimento, esempio o sistema di credenze in questo caso applicato alla scrittura di codice.
+>Paradigma: modello di riferimento, esempio o sistema di credenze in questo caso applicato alla scrittura di codice.\
+>Notare che si possono creare classi dentro le classi.
 
 Еsempio di classe e oggetto in C#:
 
@@ -284,7 +285,7 @@ Questa distinzione mi porta ad introdurre il modificatore d'accesso internal. Di
 
 ### Ereditarietà
 L'**ereditarietà** è quel concetto dell'OOP che **permette ad una classe detta figlio, di ereditare tutti i campi/proprietà e metodi di una classe detta padre a patto che questi non siano private**.
-Le classi padri possono essere chiamate anche classe **base** e le figlie **classe derivate**.
+Le classi padri possono essere chiamate anche classe **base o superclasse** e le figlie **classe derivate o sottoclasse**.
 
 Questo ci permette di fare un'approfondimento sui costruttori e sul loro overload:
 ```C#
@@ -307,12 +308,6 @@ Questo ci permette di fare un'approfondimento sui costruttori e sul loro overloa
             this._base = lati;
             this.nomeFigura = nomeFigura;
         }
-
-        //Definisce che la funzione può essere sovvrascritta. Dunque rende la funzione sovvrascrivibile
-        public virtual int CalcolaArea()
-        {
-            return Base * Base;
-        }
     }
     // Rettangolo (classe figlia) eredita Figura (classe padre)
     class Rettangolo : Figura
@@ -324,12 +319,6 @@ Questo ci permette di fare un'approfondimento sui costruttori e sul loro overloa
         public Rettangolo(int basi,int altezza, string nomeFigura) : base(basi, nomeFigura)
         { 
             height = altezza;
-        }
-
-        // Sovvrascrive il comportamento del metodo padre CalcolaArea()
-        public override int CalcolaArea()
-        {
-            return height * Base;  
         }
     }
 ```
@@ -345,7 +334,14 @@ Questo ci permette di fare un'approfondimento sui costruttori e sul loro overloa
 
 L'ereditarietà porta anche alla **relazione is-a**, ovverosia Rettangolo è una figura mentre una figura non è un rettangolo. Dunque **Rettangolo is a Figura**. La relazione **Has-a** invece si applica nel momento in cui **una classe utilizza un'altra classe** al suo interno e non ne eredita alcun comportamento. Un esempio potrebbe essere Figura has a List se sostituissimo _base con una lista di int.
 
+### Polimorfismo
+Il **Polimorfismo** è il terzo principio della programmazione ad oggetti ed è strettamente legato al principio dell'ereditarietà. Questo pilastro, come suggerisce il nome, è dovuto dal fatto che un tipo può essere contenuto in altri tipi. In questo caso nella programmazione ad oggetti l'esempio è che una classe padre potrà sempre contenere una classe figlia in quanto condivide delle parti di codice ma una classe figlia, che può implementare altri campi/proprietà, non potrà mai contenere una classe padre in quanto hanno dettagli diversi.
+
+>[!NOTE]
+>Due classi figlie di una classe padre son detti "fratelli" e due classi fratelli non possono mai essere castate tra di loro.
+
 #### Down-casting e Up-casting e Is
+Visto la relazione padre figlio ci sono due tipi di cast. Da notare però che nel momento in cui una classe figlio viene castata a padre i metodi implementati verrano sovrascritti solo se presente la keyword override che verrà affrontata nel prossimo capitolo.
 
 Ci sono due tipi di cast:
 - **"Down-casting**: cast da padre a figlio
@@ -394,7 +390,104 @@ in C# per fare un cast:
     }
 ```
 
-### Polimorfismo
+#### Virutal, abstract, override e new
+Il modificatore **virutal** sta a significare che le classi figlie potranno andare a sovvrascrivere il comportamento interno di un metodo ma non sono costrette a farlo. Mentre **abstract**, costringe anche la classe intera ad essere abstract, è un metodo esistente ma non implementato nella classe padre, appunto astratto, che richiede di essere sovrascritto nelle classi figlie. Come avete notato sia abstract che virtual parlano di sovvrascrivere e a questo ci viene in aiuto la keyword override che, appunto, indica che una funzione muterà il proprio comportamento senza però cambiare firma. Nel momento in cui si casta a classe padre una classe figlia se vi è presente la keyword override il metodo richiamato dalla classe padre sarà quello figlio. Mentre se c'è la keyword new il metodo non verrà riconosciuto nonostante new permetta le stesse cose di override.
 
->[!IMPORTANT]
->Gli appunti sono da sistemare in quanto il polimorfismo non è completo e va spostato anche override in questa sezione
+Codice esempio:
+```C#
+    abstract class Animale
+    {
+        protected int Anni { get; set; }
+        protected int Cibo { get; set; }
+        protected string Nome { get; set; }
+
+        public Animale(int anni, string nome, int cibo)
+        {
+            if (anni < 0)
+            {
+                throw new ArgumentException("Animale inesistente");
+            }
+            if(cibo < 0)
+            {
+                throw new ArgumentException("Il tuo animale non può non mangiare");
+            }
+
+            this.Anni = anni;
+            this.Nome = nome;
+        }
+
+        public abstract string Verso();
+
+        public virtual string QuantitaCibo()
+        {
+            return $"Il tuo animale ha bisogno di {Cibo} crocchette";
+        }
+    }
+
+    class Cane : Animale
+    {
+        public Cane(int anni, string nome, int cibo) : base(anni,nome,cibo) {}
+
+        public override string Verso()
+        {
+            return "bau bau";
+        }
+
+        public virtual string QuantitaCibo()
+        {
+            return $"Il tuo animale ha bisogno di {Cibo} crocchette";
+        }
+    }
+
+    class Papera : Animale
+    {
+        public Papera(int anni, string nome, int cibo) : base(anni,nome,cibo) {}
+
+        public override string Verso()
+        {
+            return "Quack Quack";
+        }
+
+        public override string QuantitaCibo()
+        {
+            return $"Il tuo animale ha bisogno di {Cibo} molluschi";
+        }
+    }
+```
+
+## Multi ereditarietà
+Notare che in C# la multi ereditarietà non è possibile. I programmatori per questo sono arrivati a trovare un modo per girarci attorno: **le interfacce** ovverosia elementi che definiscono dei metodi base che una classe deve implementare senza fornire dettagli sul come implementarli.
+
+Esempio di come ereditarle (esempio superfluo e al solo scopo di far vedere come ereditarle):
+```C#
+    // Vengono ereditate più interfacce <Figura> specifica per quale classe è
+    class Figura : IEquatable<Figura>, IComparable<Figura>
+    {
+        int lati;
+        string nomeFigura;
+
+        // Меtodo definito di Icomparable
+        public int CompareTo(Figura other)
+        {
+            return this.nomeFigura == other.nomeFigura ? 0 : 1;
+        }
+
+        // Metodo definito di IEquatable
+        public bool Equals(Figura other)
+        {
+            return this.lati == other.lati;
+        }
+
+        // La keyword operator ti permette di ridefinire il comportamento di alcuni operatori come +, - o, in questo caso, ==. Il paragone == richiede l'implementazione anche di !=
+        static public bool operator ==(Figura a1, Figura a2)
+        {
+            return a1.Equals(a2);
+        }
+
+        static public bool operator !=(Figura a1, Figura a2)
+        {
+            return !a1.Equals(a2);
+        }
+
+    }
+```
