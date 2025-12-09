@@ -67,8 +67,8 @@ Per poter nascondere questi dettagli usiamo i così detti modificatori di access
 |         Posizione del chiamante        | public | private |
 |:--------------------------------------:|--------|---------|
 | All'interno della classe               |    ✔️️   |     ✔️️    |
-| Classe derivata (stesso assembly)      |    ✔️️   |     ✔️️    |
-| Classe non derivata (stesso assembly)  |    ✔️️   |     ✔️️    |
+| Classe derivata (stesso assembly)      |    ✔️️   |     ❌    | 
+| Classe non derivata (stesso assembly)  |    ✔️️   |     ❌    |
 | Classe derivata (assembly diverso)     |    ✔️️   |     ❌    |
 | Classe non derivata (assembly diverso) |    ✔️️   |     ❌    |
 
