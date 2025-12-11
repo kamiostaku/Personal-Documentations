@@ -391,7 +391,7 @@ in C# per fare un cast:
 ```
 
 #### Virutal, abstract, override e new
-Il modificatore **virutal** sta a significare che le classi figlie potranno andare a sovvrascrivere il comportamento interno di un metodo ma non sono costrette a farlo. Mentre **abstract**, costringe anche la classe intera ad essere abstract, è un metodo esistente ma non implementato nella classe padre, appunto astratto, che richiede di essere sovrascritto nelle classi figlie. Come avete notato sia abstract che virtual parlano di sovvrascrivere e a questo ci viene in aiuto la keyword override che, appunto, indica che una funzione muterà il proprio comportamento senza però cambiare firma. Nel momento in cui si casta a classe padre una classe figlia se vi è presente la keyword override il metodo richiamato dalla classe padre sarà quello figlio. Mentre se c'è la keyword new il metodo non verrà riconosciuto nonostante new permetta le stesse cose di override.
+Il modificatore **virutal** sta a significare che le classi figlie potranno andare a sovvrascrivere il comportamento interno di un metodo ma non sono costrette a farlo. Mentre **abstract**, costringe anche la classe intera ad essere abstract, è un metodo esistente ma non implementato nella classe padre, appunto astratto, che richiede di essere sovrascritto nelle classi figlie. Come avete notato sia abstract che virtual parlano di sovvrascrivere e a questo ci viene in aiuto la keyword override che, appunto, indica che una funzione muterà il proprio comportamento senza però cambiare firma. Nel momento in cui si casta a classe padre una classe figlia se è presente la keyword override il metodo richiamato dalla classe padre sarà quello del figlio. Mentre con new il metodo non verrà riconosciuto perché new va a creare un nuovo metodo all'interno della classe che esisterà solo in quel contesto. Di conseguenza, essendo che con virtual il padre implemententarà già un metodo omonimo, il metodo della classe figlia verrà ignorato.
 
 Codice esempio:
 ```C#
@@ -414,6 +414,7 @@ Codice esempio:
 
             this.Anni = anni;
             this.Nome = nome;
+            this.Cibo = cibo;
         }
 
         public abstract string Verso();
@@ -433,7 +434,7 @@ Codice esempio:
             return "bau bau";
         }
 
-        public virtual string QuantitaCibo()
+        public override string QuantitaCibo()
         {
             return $"Il tuo animale ha bisogno di {Cibo} crocchette";
         }
