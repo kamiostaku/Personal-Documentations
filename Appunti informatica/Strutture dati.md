@@ -11,7 +11,7 @@ Si possono inoltre dividere in base al tipo di contenuti:
 
 Un'ultima distinzione che si potrebbe fare è sulla loro dimensione:
 - **Statiche**: Hanno una dimensione fissa che non cambierà mai durante l'esecuzione. Es. Array
-- **Dinamiche**: Hanno dimensioni che possono variare in base al numero di alimenti che vengon aggiunti. Es. Liste, Code, Stack ecc...
+- **Dinamiche**: Hanno dimensioni che possono variare in base al numero di elementi che vengon aggiunti. Es. Liste, Code, Stack ecc...
 
 
 <br><br>
@@ -364,7 +364,7 @@ In C# l'implementazione avviene tramite array dinamico e ha come campi/propriet�
 - **_array** = L'array in cui i dati verranno immagazzinati.
 - **_size** = Indice di elementi presenti e di conseguenza dove inserire il prossimo, ha ruolo di head.
 - **Capacity** = Dimensione totale del vettore.
-- **Top eleemnt** = Elemento a cui si può accedere tramite Peek().
+- **Top element** = Elemento a cui si può accedere tramite Peek().
   
 Di seguito analizzeremo un paio di metodi:
 
