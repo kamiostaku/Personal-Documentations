@@ -1,4 +1,4 @@
-# Strutture Dati
+# Strutture Dati pisda
 Le **strutture dati** sono modi in cui conservare informazioni, sono utili perché permettono di definire il modo in cui accediamo ai dati conservati nella memoria. Dunque conviene fare una buona scelta di quale struttura utilizzare dato che può significativamente incidere sulla velocità del programma.
 
 Le strutture dati si dividono principalmente in:
