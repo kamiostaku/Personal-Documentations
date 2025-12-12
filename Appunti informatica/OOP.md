@@ -334,6 +334,40 @@ Questo ci permette di fare un'approfondimento sui costruttori e sul loro overloa
 
 L'ereditarietà porta anche alla **relazione is-a**, ovverosia Rettangolo è una figura mentre una figura non è un rettangolo. Dunque **Rettangolo is a Figura**. La relazione **Has-a** invece si applica nel momento in cui **una classe utilizza un'altra classe** al suo interno e non ne eredita alcun comportamento. Un esempio potrebbe essere Figura has a List se sostituissimo _base con una lista di int.
 
+#### Sealed
+Il modificatore **sealed** comunica al programma che una classe non può essere ereditata. Un'esempio di dove potrebbe avere senso il suo utilizzo è:
+```C#
+    class Figura
+    {
+        private int _base;
+        private string nomeFigura;
+
+        protected int Base { get; set; }
+        protected int NomeFigura { get; set; }
+
+        public Figura(int lati, string nomeFigura)
+        {
+            if (lati < 3)
+            {
+                throw new ArgumentException("Non esistono figure con meno di due lati");
+            }
+
+            this._base = lati;
+            this.nomeFigura = nomeFigura;
+        }
+    }
+    sealed class Rettangolo : Figura
+    {
+        private int height;
+
+        public Rettangolo(int basi,int altezza, string nomeFigura) : base(basi, nomeFigura)
+        { 
+            height = altezza;
+        }
+    }
+```
+In questo caso essendo che non ci sono delle sotto sezioni di rettangolo vogliamo far si che non possa essere ereditato da nessuna classe. Per fare ciò basta usare sealed. Di conseguenza Rettangolo non sarà mai il padre di una classe.
+
 ### Polimorfismo
 Il **Polimorfismo** è il terzo principio della programmazione ad oggetti ed è strettamente legato al principio dell'ereditarietà. Questo pilastro, come suggerisce il nome, è dovuto dal fatto che un tipo può essere contenuto in altri tipi. In questo caso nella programmazione ad oggetti l'esempio è che una classe padre potrà sempre contenere una classe figlia in quanto condivide delle parti di codice ma una classe figlia, che può implementare altri campi/proprietà, non potrà mai contenere una classe padre in quanto hanno dettagli diversi.
 
